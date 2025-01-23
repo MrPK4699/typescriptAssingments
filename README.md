@@ -1,0 +1,1 @@
+# typescriptAssingment-1
