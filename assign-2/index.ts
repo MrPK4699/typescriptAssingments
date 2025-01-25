@@ -40,19 +40,22 @@ let library : Book[] =[
             quantity: 3,
       },
 ]
-
+console.log('library : ',library);
     
 // 2. Union and Intersection Types: Utilize union and intersection types to define complex data structures and improve type safety:
 
 // Define a union type BookFormat to represent different formats of books, such as paperback, hardcover, and ebook.
 type BookFormat =  'paperback' | 'hardcover'| 'ebook'
 
+console.log('BookFormat : ')
 let format:BookFormat ;
  format='paperback'; 
+ console.log(format);
  format='hardcover'; 
+ console.log(format);
  format='ebook'; 
-
- format='abcd'; 
+console.log(format);
+//  format='abcd'; 
 
 // Create an intersection type LibraryBook by combining the Book interface with the BookFormat union type.
 
@@ -67,7 +70,7 @@ let librarybook: LibraryBook={
       quantity: 4,
       format: 'ebook'
 }
-
+console.log('librarybook : ', librarybook)
 // 3. Interface Definitions: Define interfaces to establish clear contracts for data structures:
 
 // Create an interface Book to define the structure of a book object with properties id, title, author, genre, and quantity.
@@ -90,16 +93,77 @@ let inventory: LibraryBook[] =[
             format: 'paperback'   
       }
 ]
+console.log('inventory : ',inventory)
 
 // 4. Enums: Implement enums to represent fixed sets of values for book genres:
 
 // Define an enum Genre to represent different genres of books, such as Fiction, Non-Fiction, Mystery, Thriller, etc.
+enum Genre {
+      Fiction= 'Fiction',
+      ['Non-Fiction']= 'Non-Fiction', 
+      Mystery= 'Mystery', 
+      Thriller= 'Thriller',
+      Biography = "Biography",
+}
 // Use the Genre enum to specify the genre property of book objects in the library inventory.
-
+type libraryInventory = Book & {genre:Genre} 
+let library_inventory : libraryInventory[] =[
+      {
+            id: 7,
+            title: 'title7',
+            author: 'Author7',
+            genre: Genre.Fiction,
+            quantity: 7,
+      },
+      {
+            id: 8,
+            title: 'title8',
+            author: 'Author8',
+            genre: Genre["Non-Fiction"],
+            quantity: 8,
+      },
+      {
+            id: 9,
+            title: 'title9',
+            author: 'Author9',
+            genre: Genre.Mystery,
+            quantity: 9,
+      },
+      {
+            id: 10,
+            title: 'title10',
+            author: 'Author10',
+            genre: Genre["Thriller"],
+            quantity: 10,
+      },
+      {
+            id: 11,
+            title: 'title11',
+            author: 'Author11',
+            genre: Genre.Biography,
+            quantity: 11,
+      },
+]
+console.log('library_inventory : ', library_inventory)
 
 // 5. Testing: Test your TypeScript code by performing the following tasks:
 
 // Display the library inventory on the console, showing the details of each book.
 // Add functionality to search for books by title, author, or genre.
+function searchBooks(searchType:'title'| 'author'| 'genre', searchValue:string) : libraryInventory[]{
+      return  library_inventory.filter(book=>{
+            return book[searchType]===searchValue;
+      })
+}
+console.log('searchBooks by genre : Fiction    ;', searchBooks('genre', 'Fiction'))
 // Implement a feature to update the quantity of books available in the inventory.
+function updateQuantity(id:number, value:number): void{
+      library_inventory.forEach((book)=>{
+            if(book.id===id){
+                  book.quantity= value;
+            }
+      })
+}
+updateQuantity(11,1);
+console.log('updateQuantity of id 11 by 1   ;', library_inventory)
 // Ensure that the TypeScript compiler catches type errors and provides helpful type annotations.
