@@ -3,7 +3,8 @@
 // Declare a variable age of type number and assign it a value of 25.
 let age:number = 25;
 // Declare a variable largeNumber of type bigint and assign it a value of 9007199254740991n.
-let largeNumber:bigint = 9007199254740991n;
+let largeNumber: bigint = 9007199254740991n;
+
 // String Type:
 
 // Declare a variable name of type string and assign it a value of "John Doe".
@@ -61,7 +62,23 @@ function Declarations():void{
 
 // Function Parameters: Declare parameters with type annotations.
 // Return Types: Specify return types for functions.
+function Parameters(name:string, age:number):string{
+      return `${name} is ${age} years old.`
+}
+
 // Object Types: Define object types using interfaces and type aliases:
 
 // Interface: Create interfaces to define object shapes with specific properties and types.
+type obj ={
+      shape : string,
+      unit : string,
+      parameter : number,
+      area : number,
+}
 // Type Alias: Use type aliases to create custom type names for complex data structures.
+let obj1: obj ={
+      shape : 'quardilateral',
+      unit : 'meter',
+      parameter : 16,
+      area : 16,
+}
